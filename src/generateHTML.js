@@ -4,7 +4,7 @@ const generateManager = function (Manager) {
         <div class="card h-100">
             <div class="card-header">
                 <h3>${Manager.name}</h3>
-                <h4>Manager</h4><i class="material-icons">content_paste</i>
+                <h4>Manager</h4>
             </div>
             <div class="card-body">
                 <p class="id">ID: ${Manager.id}</p>
@@ -22,7 +22,7 @@ const generateEngineer = function (Engineer) {
         <div class="card h-100">
             <div class="card-header">
                 <h3>${Engineer.name}</h3>
-                <h4>Engineer</h4><i class="material-icons">laptop_mac</i>
+                <h4>Engineer</h4>
             </div>
             <div class="card-body">
                 <p class="id">ID: ${Engineer.id}</p>
@@ -40,7 +40,7 @@ const generateIntern = function (Intern) {
         <div class="card h-100">
             <div class="card-header">
                 <h3>${Intern.name}</h3>
-                <h4>Intern</h4><i class="material-icons">assignment_ind</i>
+                <h4>Intern</h4>
             </div>
             <div class="card-body">
                 <p class="id">ID: ${Intern.id}</p>
@@ -90,4 +90,35 @@ generateHTML = (teamArray) => {
 
 }
 
-module.exports = generateHTML; 
+const generateTeamPage = function (teamMemberCards) {   
+    return`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Team Profile</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <h1 class="text-center">Team Profile</h1>
+        </header>
+        <main>
+            <div class="container">
+                <div class="row justify-content-center" id="team-cards">
+                    <!--Team Cards-->
+                    ${teamMemberCards}
+                </div>
+            </div>
+        </main>
+        
+    </body>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    </html>
+  `;
+}
+module.exports = generateHTML
