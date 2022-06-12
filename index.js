@@ -66,7 +66,6 @@ const addManager = () => {
         const manager = new Manager(name, id, email, officeNumber)
 
         teamArray.push(manager)
-        console.log(manager)
     })
 }
 
@@ -150,11 +149,8 @@ const addTeamMember = () => {
         if (role === 'Engineer') {
             teamMember = new Engineer(name, id, email, github)
 
-            console.log(teamMember)
         } else if (role === 'Intern') {
             teamMember = new Intern(name, id, email, school)
-
-            console.log(teamMember)
         }
 
         teamArray.push(teamMember)
@@ -162,7 +158,6 @@ const addTeamMember = () => {
         if (confirmAddTeamMember) {
             return addTeamMember(teamArray)
         } else {
-            console.log(teamArray)
             return teamArray
         }
     })
