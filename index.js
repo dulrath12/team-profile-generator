@@ -69,3 +69,100 @@ const addManager = () => {
         console.log(manager)
     })
 }
+
+const addTeamMember = () => {
+    return inquirer.prompt ([
+        {
+            type: 'list',
+            name: 'role',
+            message: "Please choose the Team Member's role:",
+            choices: ['Engineer', 'Intern']
+        },
+        {
+            type: 'input',
+            name: 'name',
+            message: "What is the Team Member's name?",
+            validate: nameInput => {
+                if (nameInput) {
+                    return true
+                } else {
+                    return false
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: "What is the Team Member's ID number?",
+            validate: idInput => {
+                if (idInput !== Number) {
+                    console.log("Please enter the Team Member's ID number")
+                    return false
+                } else {
+                    return true
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: "What is the Team Member's Email address?"
+        },
+        {
+            type: 'input',
+            name: 'github',
+            message: "Please enter the Team Member's Github username.",
+            when: (input) => input.role === 'Engineer',
+            validate: githubInput => {
+                if (githubInput) {
+                    return true
+                } else {
+                    console.log("Please enter the Team Member's github username!")
+                    return false
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'school',
+            message: "Please enter the Intern's school.",
+            when: (input) => input.role === 'Intern',
+            validate: schoolInput => {
+                if (schoolInput) {
+                    return true
+                } else {
+                    console.log("Please enter the Intern's school!")
+                    return false
+                }
+            }
+        },
+        {
+            type: 'confirm',
+            name: 'confirmAddTeamMember',
+            message: 'Would you like to add more Team Members?',
+            default: false
+        }
+    ])
+    .then(teamMemberData => {
+        let {name, id, email, role, github, school, confirmAddTeamMember} = teamMemberData
+        let teamMember
+
+        if (role === 'Engineer') {
+            teamMember = new Engineer(name, id, email, github)
+
+            console.log(teamMember)
+        } else if (role === 'Intern') {
+            teamMember = new Intern(name, id, email, school)
+
+            console.log(teamMember)
+        }
+
+        teamArray.push(teamMember)
+
+        if (confirmAddTeamMember) {
+            return addTeamMember(teamArray)
+        } else {
+            return teamArray
+        }
+    })
+}
