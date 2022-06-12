@@ -34,7 +34,7 @@ const addManager = () => {
             name: 'id',
             message: "What is your Manager's ID number?",
             validate: idInput => {
-                if (idInput !== Number) {
+                if (isNaN(idInput)) {
                     console.log("Please enter your Manager's ID Number!")
                     return false
                 } else {
@@ -52,7 +52,7 @@ const addManager = () => {
            name: 'officeNumber',
            message: "What is the Manager's office number?",
            validate: officeNumberInput => {
-               if (officeNumberInput !== Number) {
+               if (isNaN(officeNumberInput)) {
                    console.log("Please enter your Manager's office number!")
                    return false
                } else {
@@ -95,7 +95,7 @@ const addTeamMember = () => {
             name: 'id',
             message: "What is the Team Member's ID number?",
             validate: idInput => {
-                if (idInput !== Number) {
+                if (isNaN(idInput)) {
                     console.log("Please enter the Team Member's ID number")
                     return false
                 } else {
@@ -145,7 +145,7 @@ const addTeamMember = () => {
     ])
     .then(teamMemberData => {
         let {name, id, email, role, github, school, confirmAddTeamMember} = teamMemberData
-        let teamMember
+        let teamMember = {}
 
         if (role === 'Engineer') {
             teamMember = new Engineer(name, id, email, github)
@@ -162,7 +162,19 @@ const addTeamMember = () => {
         if (confirmAddTeamMember) {
             return addTeamMember(teamArray)
         } else {
+            console.log(teamArray)
             return teamArray
+        }
+    })
+}
+
+const writeFile = data => {
+    fs.writeFile('./dist/index.html', data, err => {
+        if (err) {
+            console.log(err)
+            return
+        } else {
+            console.log('Your team profile has been created. Plesae check the index.html for you team profile')
         }
     })
 }
