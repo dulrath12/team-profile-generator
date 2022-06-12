@@ -52,6 +52,42 @@ const generateIntern = function (Intern) {
     `
 };
 
+generateHTML = (teamArray) => {
 
+    pageArray = []; 
+
+    for (let i = 0; i < teamArray.length; i++) {
+        const teamMember = teamArray[i];
+        const role = teamMember.getRole() 
+
+
+        if (role === 'Manager') {
+            const ManagerCard = generateManager(teamMember);
+
+            pageArray.push(ManagerCard);
+        }
+
+        if (role === 'Engineer') {
+            const EngineerCard = generateEngineer(teamMember);
+
+            pageArray.push(EngineerCard);
+        }
+
+        if (role === 'Intern') {
+            const InternCard = generateIntern(teamMember);
+
+            pageArray.push(InternCard);
+        }
+        
+    }
+
+
+    const teamMemberCards = pageArray.join('')
+
+
+    const generateTeam = generateTeamPage(teamMemberCards); 
+    return generateTeam;
+
+}
 
 module.exports = generateHTML; 
